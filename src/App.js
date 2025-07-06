@@ -1,6 +1,6 @@
 import React from 'react'
 import axios from 'axios'
-import GiftSearch from './components/GifSearch'
+import GifSearch from './components/GifSearch'
 import GifList from './components/GifList'
 import styled from 'styled-components'
 
@@ -12,7 +12,7 @@ display: grid;
 `
 
 axios.defaults.baseURL = 'https://api.giphy.com/v1/gifs'
-const API_KEY = 'g63gyqOSfqnXWPgNePzjL3eTVRgvDa7f'
+const API_KEY = ''
 
 export default class App extends React.Component {
   state = {
@@ -44,7 +44,7 @@ export default class App extends React.Component {
     const { images } = this.state
     return (
       <Div>
-        <GiftSearch onSubmit={this.handleSubmit}/>
+        <GifSearch onSubmit={this.handleSubmit}/>
         <GifList images={images} />
       </Div>
     )
