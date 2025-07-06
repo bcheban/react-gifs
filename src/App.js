@@ -12,7 +12,7 @@ display: grid;
 `
 
 axios.defaults.baseURL = 'https://api.giphy.com/v1/gifs'
-const {API_KEY} = process.env
+const API_KEY = 'g63gyqOSfqnXWPgNePzjL3eTVRgvDa7f'
 
 export default class App extends React.Component {
   state = {
