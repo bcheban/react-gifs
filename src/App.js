@@ -2,27 +2,35 @@ import React from 'react'
 import axios from 'axios'
 import GiftSearch from './components/GifSearch'
 import GifList from './components/GifList'
+import styled from 'styled-components'
 
-axios.defaults.baseURL = 'https://api.giphy.com/v2'
+const Div = styled.div`
+display: grid;
+  grid-template-columns: 1fr;
+  grid-gap: 16px;
+  padding-bottom: 24px;
+`
+
+axios.defaults.baseURL = 'https://api.giphy.com/v1/gifs'
 const API_KEY = 'g63gyqOSfqnXWPgNePzjL3eTVRgvDa7f'
 
 export default class App extends React.Component {
   state = {
     images: [],
     value: '',
-    data: ''
+    data: '',
   }
 
   handleSubmit = async value => {
     const query = value.trim()
     this.setState({ value: query, images: []})
+    const endpoint = query ? '/search' : '/trending';
     try {
-      const { data } = await axios.get('/emoji', {
+      const { data } = await axios.get(endpoint, {
         params: {
           q: query,
           api_key: API_KEY,
           limit: 10,
-          offset: 0
         },
       })
       this.setState({ images: data.data })
@@ -35,10 +43,10 @@ export default class App extends React.Component {
   render() {
     const { images } = this.state
     return (
-      <div className="App">
+      <Div>
         <GiftSearch onSubmit={this.handleSubmit}/>
         <GifList images={images} />
-      </div>
+      </Div>
     )
   }
 }
